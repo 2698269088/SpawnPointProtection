@@ -1,0 +1,39 @@
+# 受保护区域半径（单位：区块）
+protected-radius: 16
+
+# 是否清理爆炸物（如TNT、苦力怕爆炸等）
+clear-explosives: true
+
+# 是否允许生成怪物或其他敌对生物
+allow-mob-spawn: false
+
+# 是否允许PVP（玩家对战）
+allow-pvp: false
+
+# 是否将玩家收到的伤害设置为0
+# 保留伤害动画和效果，但不扣除生命值
+damage-immunity: true
+
+# 受保护的维度列表（World.Environment）
+# 可选值: NORMAL(主世界), NETHER(地狱), THE_END(末地)
+protected-worlds:
+  - "NORMAL"
+  - "NETHER"
+  - "THE_END"
+
+# 下界基岩层控制（仅在地狱维度生效，不受保护区块距离限制）
+nether-bedrock-control:
+  # 是否允许玩家进入下界基岩层以上（Y > 127）
+  allow-above-bedrock: true
+  
+  # 触发传送的高度阈值（当玩家Y坐标超过此值时才会被传送）
+  teleport-threshold-height: 256
+  
+  # 是否将玩家传送到基岩层以下（当玩家在基岩层以上时）
+  teleport-below-bedrock: true
+  
+  # 传送目标高度（仅在teleport-below-bedrock为true时生效）
+  teleport-height: 80
+  
+  # 是否允许玩家在基岩层上方放置方块（Y > 127）
+  allow-build-above-bedrock: true

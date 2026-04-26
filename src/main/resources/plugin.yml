@@ -1,0 +1,20 @@
+name: SpawnPointProtection
+version: '1.1'
+main: top.mcocet.spawnPointProtection.SpawnPointProtection
+api-version: '1.21'
+authors: [ MCOCET ]
+description: 保护服务器出生点区块，下界基岩层以上的区块
+website: https://home.mcocet.top
+folia-supported: true
+
+commands:
+  spp:
+    description: 出生点保护插件主命令
+    usage: /spp <reload>
+    permission: spp.reload
+    aliases: [spawnpointprotection]
+
+permissions:
+  spp.reload:
+    description: 允许重新加载插件配置
+    default: op
