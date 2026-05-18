@@ -27,6 +27,9 @@ public final class SpawnPointProtection extends JavaPlugin {
         ReloadCommand reloadCommand = new ReloadCommand(this);
         getCommand("spp").setExecutor(reloadCommand);
         
+        TeleportToSpawnCommand teleportCommand = new TeleportToSpawnCommand(this);
+        getCommand("tpsp").setExecutor(teleportCommand);
+        
         getLogger().info("出生点保护功能已启用！");
     }
 

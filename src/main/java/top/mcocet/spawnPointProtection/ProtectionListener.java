@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
+import org.bukkit.entity.Phantom;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -73,6 +74,27 @@ public class ProtectionListener implements Listener {
     }
     
     /**
+     * 处理爆炸伤害事件 - 防止爆炸伤害
+     */
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onExplosionDamage(EntityDamageByEntityEvent event) {
+        // 检查是否是爆炸造成的伤害
+        if (event.getCause() != EntityDamageEvent.DamageCause.BLOCK_EXPLOSION && 
+            event.getCause() != EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+            return;
+        }
+        
+        Entity target = event.getEntity();
+        if (!(target instanceof Player)) return;
+        
+        Location location = target.getLocation();
+        if (isInProtectedArea(location)) {
+            // 取消爆炸伤害
+            event.setCancelled(true);
+        }
+    }
+    
+    /**
      * 处理生物生成事件 - 控制怪物生成
      */
     @EventHandler(priority = EventPriority.HIGH)
@@ -82,8 +104,8 @@ public class ProtectionListener implements Listener {
         Entity entity = event.getEntity();
         Location location = entity.getLocation();
         
-        // 只阻止敌对生物生成
-        if (entity instanceof Monster && isInProtectedArea(location)) {
+        // 阻止敌对生物和幻翼生成
+        if ((entity instanceof Monster || entity instanceof Phantom) && isInProtectedArea(location)) {
             event.setCancelled(true);
         }
     }
